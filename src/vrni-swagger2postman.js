@@ -8,14 +8,14 @@
 // $ npm i swagger2-postman-generator
 // 
 // Example usage:
-// $ node vrni-swagger2postman.js https://vrni-platform/doc-api/local/swagger/vrni-api-spec-4.0.0.json vRNI-API-Postman-Collection.json vRNI-API-Postman-Environment.json
+// $ node vrni-swagger2postman.js vrni-api-spec-4.0.0.json vRNI-API-Postman-Collection.json vRNI-API-Postman-Environment.json
 
 // ignore invalid SSL certificate
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
 // make sure we have the proper arguments
 if(process.argv.length < 5) {
-    console.log("Usage: node vrni-swagger2postman.js <URL-to-vRNI-Swagger-Spec> <Postman-Collection-Output-File> <Postman-Environment-Output-File>");
+    console.log("Usage: node vrni-swagger2postman.js <File-vRNI-Swagger-Spec> <Postman-Collection-Output-File> <Postman-Environment-Output-File>");
     return;
 }
 
@@ -29,7 +29,7 @@ var S2P = require("swagger2-postman-generator");
 var fs = require("fs");
 
 // download the swagger spec and save it into a swagger2-postman-generator object
-var collectionObj = S2P.convertSwagger().fromUrl(vRNISwaggerSpecURL);
+var collectionObj = S2P.convertSwagger().fromFile(vRNISwaggerSpecURL);
 
 // generate a Collection JSON structure and write it to file
 collectionObj.toPostmanCollectionFile(postmanOutputFile, {
